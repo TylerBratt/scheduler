@@ -90,7 +90,14 @@ Appointment/Show
 Appointment/Form
 
     State:
+        name: string
+        interviewer: Number
     Props:
+        name: string
+        interviewers: array
+        interviewer: Number
+        onSave: Func
+        onCancel: Func
     Used by:
 
 Appointment/Status
