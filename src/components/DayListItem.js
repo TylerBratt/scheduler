@@ -3,7 +3,7 @@ import classNames from "classnames";
 import 'components/DayListItem.scss'
 
 export default function DayListItem(props) { 
-  
+  console.log(props)
   const formatSpots = () =>{
     if (props.spots === 0) {
       return `no spots remaining`

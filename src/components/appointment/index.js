@@ -7,17 +7,14 @@ import Show from 'components/appointment/Show'
 
 
 export default function Appointment (props) {
-  const { id, time } = props
   const timeSlot = props.interview ? 
         <Show student={ props.interview && props.interview.student}
         interviewer={props.interview && props.interview.interviewer}
         /> : <Empty />
-
-
-
+        
   return (
     <article className="appointment">
-      <Header time={time} />
+      <Header time={props.time} />
         {timeSlot}
     </article>
   )
