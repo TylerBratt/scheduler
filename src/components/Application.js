@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from 'components/DayList'
 import Appointment from'components/appointment/index'
-import getAppointmentsForDay from '../helpers/selectors'
+import { getAppointmentsForDay, getInterview } from '../helpers/selectors'
 import axios from 'axios'
 
 
@@ -15,11 +15,10 @@ export default function Application(props) {
     appointments:{}
   });
   
-  const dailyAppointments= getAppointmentsForDay(state, state.day)
   const setDay = day => setState({ ...state, day });
   const setDays = days => setState(prev => ({ ...prev, days }));
   
-      
+  
   useEffect(()=>{
     const daysReq = axios.get('api/days')
     const appointmentReq = axios.get('api/appointments')
@@ -30,11 +29,18 @@ export default function Application(props) {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     });
   },[])
-
+  
   //Iterate through the dailyAppointment Object to get its' keys -- set appointment to each key -- spread and render the arrays to the appointment section
+  const dailyAppointments= getAppointmentsForDay(state, state.day)
+  
   const appointmentList = Object.keys(dailyAppointments).map(key => {
       const appointment = dailyAppointments[key]
-      return <Appointment key={appointment.id} {...appointment}/>
+      const interview = getInterview(state, appointment.interview)
+      return (
+          <Appointment 
+            key={appointment.id} {...appointment}
+            interview={interview}
+            />)
   })
   
   return (

@@ -1,4 +1,6 @@
-export default function getAppointmentsForDay(state, day) {
+import InterviewerList from "components/InterviewerList";
+
+export function getAppointmentsForDay(state, day) {
   if (!state.days) {
     return [];
   }
@@ -12,3 +14,16 @@ export default function getAppointmentsForDay(state, day) {
     ? []
     : appointmentDay.appointments.map(apptID => state.appointments[apptID]);
 }
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  } else {
+    const interviewer = state.interviewers[interview.interviewer];
+    interview.interviewer = interviewer;
+    console.log('look here', interview)
+    return interview
+  }
+}
+
+// console.log('HERE', getInterview)
