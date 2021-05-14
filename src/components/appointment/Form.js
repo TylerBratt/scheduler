@@ -44,7 +44,7 @@ export default function Form(props) {
           onClick={()=> cancel()}
           danger>Cancel</Button>
           <Button 
-          onClick={onSave}
+          onClick={()=> onSave(name, interviewer)}
           confirm>Save</Button>
         </section>
       </section>

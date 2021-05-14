@@ -1,4 +1,4 @@
-import InterviewerList from "components/InterviewerList";
+
 
 export function getAppointmentsForDay(state, day) {
   if (!state.days) {
@@ -21,9 +21,32 @@ export function getInterview(state, interview) {
   } else {
     const interviewer = state.interviewers[interview.interviewer];
     interview.interviewer = interviewer;
-    console.log('look here', interview)
     return interview
   }
 }
 
-// console.log('HERE', getInterview)
+export function getInterviewerForDay(state, day) {
+  if (!state.days) {
+    return [];
+  }
+
+  let interviewerForDay = state.days.find(elem => elem.name === day);
+  if (!interviewerForDay) {
+    return [];
+  }
+
+  return interviewerForDay.interviewers.length < 1
+    ? []
+    : interviewerForDay.interviewers.map(interviewerID => state.interviewers[interviewerID]);
+}
+
+const getNumberOfSpots = (state, day) => {
+  const dayFound = state.days.find(elem => elem.name === day);
+
+  const numberSpots = dayFound.appointments.filter(appointmentID => state.appointments[appointmentID].interview === null).length
+
+  console.log({numberSpots});
+}
+
+// const numberSpots = getNumberOfSpots(state, state.day);
+// console.timeLog(numberSpots)

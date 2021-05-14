@@ -1,47 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "components/Application.scss";
 import DayList from 'components/DayList'
 import Appointment from'components/appointment/index'
-import { getAppointmentsForDay, getInterview } from '../helpers/selectors'
-import axios from 'axios'
-
+import { getAppointmentsForDay, getInterview, getInterviewerForDay } from '../helpers/selectors'
+import useApplicationData from 'Hooks/useApplicationData'
 
 
 export default function Application(props) {
   
-  const [state, setState] = useState({
-    day:'Monday',
-    days:[],
-    appointments:{}
-  });
-  
-  const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days }));
-  
-  
-  useEffect(()=>{
-    const daysReq = axios.get('api/days')
-    const appointmentReq = axios.get('api/appointments')
-    const interviewersReq = axios.get('api/interviewers')
-    Promise.all([daysReq, appointmentReq, interviewersReq
-    ])
-    .then((all)=> {
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-    });
-  },[])
-  
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData()
+
   //Iterate through the dailyAppointment Object to get its' keys -- set appointment to each key -- spread and render the arrays to the appointment section
-  const dailyAppointments= getAppointmentsForDay(state, state.day)
   
+  const dailyAppointments= getAppointmentsForDay(state, state.day)
   const appointmentList = Object.keys(dailyAppointments).map(key => {
-      const appointment = dailyAppointments[key]
-      const interview = getInterview(state, appointment.interview)
-      return (
-          <Appointment 
-            key={appointment.id} {...appointment}
-            interview={interview}
-            />)
-  })
+    const appointment = dailyAppointments[key]
+    const interview = getInterview(state, appointment.interview)
+    const interviewers = getInterviewerForDay(state, state.day)
+    return (
+      <Appointment 
+        key={appointment.id} {...appointment}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+        />
+      );
+    })
   
   return (
     <main className="layout">
@@ -68,8 +58,10 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {appointmentList}
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        <section className="schedule">
+          {appointmentList}
+          <Appointment key='last' time='5pm' />
+        </section>
       </section>
     </main>
   );

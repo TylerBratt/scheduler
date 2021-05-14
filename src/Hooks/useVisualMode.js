@@ -6,17 +6,18 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   
   const transition = (next, replace = false) => {
+    //replace
     if (replace) {
       setMode(next)
       history.splice(history.length - 1, 1, next)
-      // console.log('this is first', history.splice(history.length - 1, 1, next))
+      //push
     } else {
       setMode(next)
-      // console.log([...history], next)
       setHistory([...history, next])
     }
   };
   
+  //pop
   const back = () => {
     if (history.length === 1) {
       setMode(history[0])
