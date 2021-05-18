@@ -1,15 +1,11 @@
 import React from "react";
-
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import Button from "components/Button";
-
 afterEach(cleanup);
 
 it("renders without crashing", () => {
   render(<Button />);
 });
-
 it("renders its `children` prop as text", () => {
   const { getByText } = render(<Button>Default</Button>);
   expect(getByText("Default")).toBeInTheDocument();
@@ -32,9 +28,7 @@ it("renders a danger button", () => {
 
 it("renders a clickable button", () => {
   const handleClick = jest.fn();
-  const { getByText } = render(
-    <Button onClick={handleClick}>Clickable</Button>
-  );
+  const { getByText } = render(<Button onClick={handleClick}>Clickable</Button>);
 
   const button = getByText("Clickable");
 
