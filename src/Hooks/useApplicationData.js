@@ -12,12 +12,13 @@ export default function useApplicationData() {
 
   // Hooks to ensure proper page loading
   useEffect(() => {
-    const daysReq = axios.get("api/days");
-    const appointmentReq = axios.get("api/appointments");
-    const interviewersReq = axios.get("api/interviewers");
-    Promise.all([daysReq, appointmentReq, interviewersReq]).then((all) => {
+    const daysReq = axios.get("/api/days");
+    const appointmentReq = axios.get("/api/appointments");
+    const interviewersReq = axios.get("/api/interviewers");
+    Promise.all([daysReq, appointmentReq, interviewersReq])
+    .then((all) => {
       setState((prev) => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-    });
+      })
   }, []);
 
   //helper to update spots counter dynamically. if the time slot interview = null, the remaining count will decrease, otherwise it will increase

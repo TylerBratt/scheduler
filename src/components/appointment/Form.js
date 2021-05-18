@@ -42,7 +42,11 @@ export default function Form(props) {
           />
           <section className="appointment__validation">{error}</section>
         </form>
-        <InterviewerList interviewers={interviewers} value={interviewer} setInterviewer={setInterviewer} />
+        <InterviewerList 
+        interviewers={interviewers} 
+        value={interviewer}
+        setInterviewer={setInterviewer} />
+        
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
