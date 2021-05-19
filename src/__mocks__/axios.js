@@ -56,8 +56,7 @@ const fixtures = {
 };
 
 export default {
-  // defaults: { baseURL: "" },
-  get: (url) => {
+  get:url => {
     if (url === "/api/days") {
       return Promise.resolve({
         status: 200,
@@ -82,7 +81,8 @@ export default {
       });
     }
   },
-  put: url => {
+
+  put:url => {
     if (url === "/api/appointments/1" || url === "/api/appointments/2") {
       return Promise.resolve({
         status: 204,
@@ -90,13 +90,17 @@ export default {
       });
     }
   },
-  delete: url => {
+
+  delete:url => {
+    console.log('do I work?')
     if (url === "/api/appointments/1" || url === "/api/appointments/2") {
+    console.log('do I work? what about now?')
+
       return Promise.resolve({
         status: 204,
         statusText: "No Content"
       });
     }
   }
-}
+};
 
