@@ -22,3 +22,23 @@ npm test
 npm run storybook
 ```
 
+##  About
+
+This is my initial leap into the React Library.  
+
+This came together with help from 
+
+- React
+
+- Storybook
+
+- Axios
+
+- Jest
+
+- Cypress
+
+## Screenshots
+
+
+
