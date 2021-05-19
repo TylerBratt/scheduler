@@ -39,6 +39,11 @@ This came together with help from
 - Cypress
 
 ## Screenshots
+!["Monday with no appointments available"](https://github.com/TylerBratt/scheduler/blob/master/docs/scheduler-1.jpg?raw=true)
+
+![Add/Edit option](https://github.com/TylerBratt/scheduler/blob/master/docs/scheduler-2.jpg?raw=true)
+
+![Confirmation page for cancelation interview](https://github.com/TylerBratt/scheduler/blob/master/docs/scheduler-3.jpg?raw=true)
 
 
 
